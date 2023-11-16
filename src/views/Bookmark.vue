@@ -1,0 +1,163 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import dayjs from 'dayjs'
+import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { useQuestionStore, useWrongStore } from '@/store'
+import Question from '@/components/Question.vue'
+
+const props = defineProps<{
+  id?: string
+}>()
+
+const wrongStore = useWrongStore()
+const { wrongQuestion } = storeToRefs(wrongStore)
+const questionStore = useQuestionStore()
+const { questions } = storeToRefs(questionStore)
+const router = useRouter()
+
+const list = computed(() => {
+  return wrongQuestion.value.map((item) => {
+    return {
+      id: item.id,
+      category: item.category,
+      time: dayjs(item.time).format('YYYY-MM-DD HH:mm:ss'),
+      questionId: item.questionId,
+      yourAnswer: item.yourAnswer,
+    }
+  })
+})
+
+const index = computed(() => {
+  return list.value.findIndex(item => item.id === props.id) + 1
+})
+
+const currentWrongQuestion = computed(() => {
+  return index.value > 0 ? list.value[index.value - 1] : undefined
+})
+
+const question = computed(() => {
+  if (questions.value.length && currentWrongQuestion.value)
+    return questions.value.find(item => item.id === currentWrongQuestion.value?.questionId)
+  else
+    return undefined
+})
+
+const handleView = function (id?: string) {
+  router.push({ name: 'Bookmark', params: { id } })
+}
+
+const prev = function () {
+  const newIndex = index.value - 1
+  if (newIndex > 0)
+    handleView(wrongQuestion.value[newIndex - 1].id)
+}
+
+const next = function () {
+  const newIndex = index.value + 1
+  if (newIndex <= wrongQuestion.value.length)
+    handleView(wrongQuestion.value[newIndex - 1].id)
+}
+
+const remove = function () {
+  if (currentWrongQuestion.value?.id) {
+    const nextId = wrongQuestion.value[index.value]?.id
+    wrongStore.remove(currentWrongQuestion.value?.id)
+    handleView(nextId)
+  }
+}
+</script>
+
+<template>
+  <div v-if="!question">
+    <v-table class="mb-14">
+      <thead>
+        <tr>
+          <th class="text-left">
+            时间
+          </th>
+          <th class="text-left">
+            题号
+          </th>
+          <th class="text-left">
+            你的答案
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in list"
+          :key="item.id"
+          @click="handleView(item.id)"
+        >
+          <td>{{ item.time }}</td>
+          <td>{{ item.questionId }}</td>
+          <td>{{ String.fromCharCode(65 + item.yourAnswer) }}</td>
+        </tr>
+      </tbody>
+    </v-table>
+    <v-banner
+      position="fixed"
+      lines="one"
+      color="primary"
+      bg-color="white"
+      :style="{ bottom: '55px', borderTopWidth: '1px' }"
+    >
+      <template #actions>
+        <v-btn
+          @click="wrongStore.clear()"
+        >
+          清空
+        </v-btn>
+      </template>
+    </v-banner>
+  </div>
+  <div v-else>
+    <div class="mb-14">
+      <Question
+        mode="review"
+        :question="question"
+        :answer="question?.answer"
+        :wrong-answer="currentWrongQuestion?.yourAnswer"
+      />
+      <v-card variant="tonal" color="amber" class="ma-4">
+        <template #text>
+          上次答错：{{ currentWrongQuestion?.time }}
+        </template>
+        <v-card-actions>
+          <div class="w-100 text-end">
+            <v-btn
+              variant="text"
+              color="amber-darken-4"
+              @click="remove()"
+            >
+              删除这条记录
+            </v-btn>
+          </div>
+        </v-card-actions>
+      </v-card>
+    </div>
+    <v-banner
+      position="fixed"
+      lines="one"
+      color="primary"
+      bg-color="white"
+      style="bottom: 55px;"
+    >
+      <template #text>
+        {{ `${index}/${wrongQuestion.length}` }}
+      </template>
+      <template #actions>
+        <v-btn @click="handleView()">
+          返回
+        </v-btn>
+        <v-btn :disabled="index === 1" @click="prev">
+          上一题
+        </v-btn>
+        <v-btn :disabled="index === wrongQuestion.length" @click="next">
+          下一题
+        </v-btn>
+      </template>
+    </v-banner>
+  </div>
+</template>
