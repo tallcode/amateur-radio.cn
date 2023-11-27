@@ -3,14 +3,14 @@ import { computed } from 'vue'
 import dayjs from 'dayjs'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { useExamStore } from '@/store'
+import { useExaminationStore } from '@/store'
 
-const examStore = useExamStore()
-const { exam } = storeToRefs(examStore)
+const examinationStore = useExaminationStore()
+const { examinations } = storeToRefs(examinationStore)
 const router = useRouter()
 
 const list = computed(() => {
-  return exam.value.map((item) => {
+  return examinations.value.map((item) => {
     return {
       id: item.id,
       category: item.category,
@@ -27,6 +27,10 @@ const list = computed(() => {
     }
   })
 })
+
+async function remove(id: string) {
+  await examinationStore.remove(id)
+}
 </script>
 
 <template>
@@ -56,7 +60,7 @@ const list = computed(() => {
           <v-btn
             prepend-icon="mdi-delete"
             variant="tonal" size="small"
-            @click.stop="() => examStore.remove(item.id)"
+            @click.stop="remove(item.id)"
           >
             删除
           </v-btn>

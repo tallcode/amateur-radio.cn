@@ -1,6 +1,6 @@
 {
-  "name": "ham-question",
-  "version": "0.0.0",
+  "name": "amateur-radio",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
+    "@vueuse/core": "^10.6.1",
     "core-js": "^3.29.0",
     "dayjs": "^1.11.10",
+    "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.0",
     "roboto-fontface": "*",

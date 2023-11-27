@@ -4,6 +4,7 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layouts/Default.vue'),
+    redirect: '/a',
     children: [
       {
         path: ':category(a|b|c)',

@@ -2,12 +2,12 @@
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
-import { useExamStore, useQuestionStore } from '@/store'
+import { useExaminationStore, useQuestionStore } from '@/store'
 
 const questionStore = useQuestionStore()
 const { category } = storeToRefs(questionStore)
-const { create } = useExamStore()
-const { exam } = storeToRefs(useExamStore())
+const { create } = useExaminationStore()
+const { examinations } = storeToRefs(useExaminationStore())
 const router = useRouter()
 const route = useRoute()
 
@@ -15,7 +15,7 @@ const selected = computed({
   get() {
     return route.name
   },
-  set(value) {
+  async set(value) {
     switch (value) {
       case 'All':
         router.push({ name: 'All', params: { category: category.value, index: 1 } })
@@ -27,18 +27,18 @@ const selected = computed({
         router.push({ name: 'History' })
         break
       case 'Test':
-        handleTest()
+        await handleTest()
         break
     }
   },
 })
 
-function handleTest() {
+async function handleTest() {
   if (selected.value === 'Test')
     return
-  const last = exam.value[0]
+  const last = examinations.value[0]
   const finsihed = last ? last?.questions.every(item => item.answer !== undefined) : true
-  const id = finsihed ? create() : last?.id
+  const id = finsihed ? await create() : last?.id
   const index = finsihed ? 1 : last?.questions.findIndex(item => item.answer === undefined) + 1
   router.push({
     name: 'Test',

@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import Question from '@/components/Question.vue'
-import { useExamStore, useQuestionStore, useWrongStore } from '@/store'
+import { useBookmarkStore, useExaminationStore, useQuestionStore } from '@/store'
 
 const props = defineProps<{
   id: string
@@ -12,9 +12,9 @@ const props = defineProps<{
 
 const questionStore = useQuestionStore()
 const { category, questions } = storeToRefs(questionStore)
-const examStore = useExamStore()
-const { exam } = storeToRefs(examStore)
-const wrongStore = useWrongStore()
+const examinationStore = useExaminationStore()
+const { examinations } = storeToRefs(examinationStore)
+const bookmarkStore = useBookmarkStore()
 const router = useRouter()
 
 const index = computed(() => {
@@ -23,11 +23,11 @@ const index = computed(() => {
 })
 
 const examQuestions = computed(() => {
-  return exam.value.find(item => item.id === props.id)?.questions || []
+  return examinations.value.find(item => item.id === props.id)?.questions || []
 })
 
 const finsihed = computed(() => {
-  return examQuestions.value.every(item => item.answer !== undefined)
+  return examQuestions.value.length && examQuestions.value.every(item => item.answer !== undefined)
 })
 
 const status = computed(() => {
@@ -63,9 +63,9 @@ const answer = computed({
   get() {
     return currentExamQuestion.value?.answer
   },
-  set(value) {
+  async set(value) {
     if (Number.isSafeInteger(value) && question.value)
-      examStore.answer(props.id, question.value?.id, value!)
+      await examinationStore.answer(props.id, question.value?.id, value!)
   },
 })
 
@@ -88,8 +88,8 @@ function swipe(direction: string) {
     prev()
 }
 
-function handleNewTest() {
-  const id = examStore.create()
+async function handleNewTest() {
+  const id = await examinationStore.create()
   router.push({
     name: 'Test',
     params: {
@@ -100,11 +100,11 @@ function handleNewTest() {
   })
 }
 
-function handleAnswer(value: number) {
+async function handleAnswer(value: number) {
   answer.value = value
   if (question.value?.answer !== value) {
     const originIndex = currentExamQuestion.value.options[value]
-    wrongStore.record(currentExamQuestion.value.id, originIndex)
+    await bookmarkStore.record(currentExamQuestion.value.id, originIndex)
   }
 }
 </script>

@@ -1,4 +1,4 @@
-interface Exam {
+interface Examination {
   id: string
   category: string
   createdAt: number

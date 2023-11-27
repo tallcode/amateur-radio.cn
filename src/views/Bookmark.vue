@@ -3,21 +3,21 @@ import { computed } from 'vue'
 import dayjs from 'dayjs'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { useQuestionStore, useWrongStore } from '@/store'
+import { useBookmarkStore, useQuestionStore } from '@/store'
 import Question from '@/components/Question.vue'
 
 const props = defineProps<{
   id?: string
 }>()
 
-const wrongStore = useWrongStore()
-const { wrongQuestion } = storeToRefs(wrongStore)
+const bookmarkStore = useBookmarkStore()
+const { bookmarks } = storeToRefs(bookmarkStore)
 const questionStore = useQuestionStore()
 const { questions } = storeToRefs(questionStore)
 const router = useRouter()
 
 const list = computed(() => {
-  return wrongQuestion.value.map((item) => {
+  return bookmarks.value.map((item) => {
     return {
       id: item.id,
       category: item.category,
@@ -32,13 +32,13 @@ const index = computed(() => {
   return list.value.findIndex(item => item.id === props.id) + 1
 })
 
-const currentWrongQuestion = computed(() => {
+const currentBookmark = computed(() => {
   return index.value > 0 ? list.value[index.value - 1] : undefined
 })
 
 const question = computed(() => {
-  if (questions.value.length && currentWrongQuestion.value)
-    return questions.value.find(item => item.id === currentWrongQuestion.value?.questionId)
+  if (questions.value.length && currentBookmark.value)
+    return questions.value.find(item => item.id === currentBookmark.value?.questionId)
   else
     return undefined
 })
@@ -50,21 +50,25 @@ const handleView = function (id?: string) {
 const prev = function () {
   const newIndex = index.value - 1
   if (newIndex > 0)
-    handleView(wrongQuestion.value[newIndex - 1].id)
+    handleView(bookmarks.value[newIndex - 1].id)
 }
 
 const next = function () {
   const newIndex = index.value + 1
-  if (newIndex <= wrongQuestion.value.length)
-    handleView(wrongQuestion.value[newIndex - 1].id)
+  if (newIndex <= bookmarks.value.length)
+    handleView(bookmarks.value[newIndex - 1].id)
 }
 
-const remove = function () {
-  if (currentWrongQuestion.value?.id) {
-    const nextId = wrongQuestion.value[index.value]?.id
-    wrongStore.remove(currentWrongQuestion.value?.id)
+const remove = async function () {
+  if (currentBookmark.value?.id) {
+    const nextId = bookmarks.value[index.value]?.id
+    await bookmarkStore.remove(currentBookmark.value?.id)
     handleView(nextId)
   }
+}
+
+const clear = async function () {
+  await bookmarkStore.clear()
 }
 </script>
 
@@ -105,7 +109,7 @@ const remove = function () {
     >
       <template #actions>
         <v-btn
-          @click="wrongStore.clear()"
+          @click="clear()"
         >
           清空
         </v-btn>
@@ -118,11 +122,11 @@ const remove = function () {
         mode="review"
         :question="question"
         :answer="question?.answer"
-        :wrong-answer="currentWrongQuestion?.yourAnswer"
+        :wrong-answer="currentBookmark?.yourAnswer"
       />
       <v-card variant="tonal" color="amber" class="ma-4">
         <template #text>
-          上次答错：{{ currentWrongQuestion?.time }}
+          上次答错：{{ currentBookmark?.time }}
         </template>
         <v-card-actions>
           <div class="w-100 text-end">
@@ -145,7 +149,7 @@ const remove = function () {
       style="bottom: 55px;"
     >
       <template #text>
-        {{ `${index}/${wrongQuestion.length}` }}
+        {{ `${index}/${bookmarks.length}` }}
       </template>
       <template #actions>
         <v-btn @click="handleView()">
@@ -154,7 +158,7 @@ const remove = function () {
         <v-btn :disabled="index === 1" @click="prev">
           上一题
         </v-btn>
-        <v-btn :disabled="index === wrongQuestion.length" @click="next">
+        <v-btn :disabled="index === bookmarks.length" @click="next">
           下一题
         </v-btn>
       </template>

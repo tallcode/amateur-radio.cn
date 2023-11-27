@@ -1,4 +1,4 @@
-interface Wrong {
+interface Bookmark {
   id: string
   time: number
   category: string
