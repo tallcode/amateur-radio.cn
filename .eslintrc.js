@@ -7,7 +7,7 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    '@antfu'
+    '@antfu',
   ],
   ignorePatterns: [
     '!*.d.ts',
