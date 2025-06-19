@@ -1,6 +1,6 @@
+import { sampleSize, shuffle, sortBy } from 'lodash-es'
 import { defineStore, storeToRefs } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
-import { sampleSize, shuffle, sortBy } from 'lodash-es'
 import { ref, watch } from 'vue'
 import { useQuestionStore } from '../question'
 import * as database from './database'

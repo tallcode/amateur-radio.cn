@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useExaminationStore, useQuestionStore } from '@/store'
 
 const questionStore = useQuestionStore()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import dayjs from 'dayjs'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useExaminationStore } from '@/store'
 

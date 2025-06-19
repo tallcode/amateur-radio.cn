@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import dayjs from 'dayjs'
 import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBookmarkStore, useQuestionStore } from '@/store'
 import Question from '@/components/Question.vue'
+import { useBookmarkStore, useQuestionStore } from '@/store'
 
 const props = defineProps<{
   id?: string
@@ -43,23 +43,23 @@ const question = computed(() => {
     return undefined
 })
 
-const handleView = function (id?: string) {
+function handleView(id?: string) {
   router.push({ name: 'Bookmark', params: { id } })
 }
 
-const prev = function () {
+function prev() {
   const newIndex = index.value - 1
   if (newIndex > 0)
     handleView(bookmarks.value[newIndex - 1].id)
 }
 
-const next = function () {
+function next() {
   const newIndex = index.value + 1
   if (newIndex <= bookmarks.value.length)
     handleView(bookmarks.value[newIndex - 1].id)
 }
 
-const remove = async function () {
+async function remove() {
   if (currentBookmark.value?.id) {
     const nextId = bookmarks.value[index.value]?.id
     await bookmarkStore.remove(currentBookmark.value?.id)
@@ -67,7 +67,7 @@ const remove = async function () {
   }
 }
 
-const clear = async function () {
+async function clear() {
   await bookmarkStore.clear()
 }
 </script>

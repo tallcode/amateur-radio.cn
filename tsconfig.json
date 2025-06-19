@@ -1,25 +1,26 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "allowSyntheticDefaultImports": true,
     "composite": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
+    "target": "esnext",
     "jsx": "preserve",
-    "sourceMap": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
     "lib": ["esnext", "dom"],
+    "useDefineForClassFields": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "resolveJsonModule": true,
     "types": [
       "node",
       "vuetify"
     ],
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",

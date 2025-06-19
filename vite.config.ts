@@ -1,11 +1,11 @@
 // Plugins
-import { URL, fileURLToPath } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import ViteFonts from 'unplugin-fonts/vite'
-
 // Utilities
 import { defineConfig } from 'vite'
+
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,7 +19,7 @@ export default defineConfig({
       styles: {
         configFile: 'src/styles/settings.scss',
       },
-    }),
+    }) as any,
     ViteFonts({
       google: {
         families: [
