@@ -1,0 +1,10 @@
+**正确选项解释**: 
+241GHz-250GHz位于30GHz-300GHz范围内，属于EHF（Extremely High Frequency，极高频）。
+
+**错误选项解释**: 
+ - B: SHF（Super High Frequency）为3GHz-30GHz，241GHz高于此范围。
+ - C: THF（Tremendously High Frequency）通常从300GHz开始，241GHz低于此。
+ - D: UHF（Ultra High Frequency）为300MHz-3GHz，241GHz远高于此。
+
+**关键字**: 
+241GHz-250GHz

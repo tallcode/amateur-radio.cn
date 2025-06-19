@@ -1,0 +1,10 @@
+**正确选项解释**:
+在业余无线电通信中，“BJT”是“北京时间”（Beijing Time）的常用缩语，用于表示中国标准时间，便于在通联中协调时间。
+
+**错误选项解释**:
+- B: 双极型半导体管是电子学中的术语（Bipolar Junction Transistor），在通信缩语中不常用。
+- C: 结型场效应半导体管是JFET（Junction Field-Effect Transistor），与业余无线电通信缩语无关。
+- D: 双基极二极管可能指UJT（Unijunction Transistor），但同样不是通信常用术语。
+
+**关键字**:
+业余无线电通信常用缩语

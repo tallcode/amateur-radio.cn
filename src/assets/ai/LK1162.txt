@@ -1,0 +1,10 @@
+**正确选项解释**：
+LED是Light Emitting Diode的缩写，中文意为发光二极管，选项A正确对应。
+
+**错误选项解释**：
+ - B: 液晶显示是LCD（Liquid Crystal Display）的缩写，与LED无关。
+ - C: 阴极射线管是CRT（Cathode Ray Tube）的缩写，与LED无关。
+ - D: 场效应管是FET（Field Effect Transistor）的缩写，与LED无关。
+
+**关键字**：
+LED

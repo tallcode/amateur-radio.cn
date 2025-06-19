@@ -1,0 +1,10 @@
+**正确选项解释**：
+选项A QRL？的意思是“Are you busy?”，直接对应问题“你正忙着吗”，表示询问对方是否在忙或频率是否被占用。
+
+**错误选项解释**：
+ - 选项B QRX？的意思是“Wait”，表示让对方等待，与是否忙无关。
+ - 选项C QSU？的意思是“Send on this frequency”，表示询问或指示在特定频率发送，与是否忙无关。
+ - 选项D QRU？的意思是“Have you anything for me?”或“I have nothing for you.”，表示询问或告知有无消息，不直接询问是否忙。
+
+**关键字**：
+“你正忙着吗”

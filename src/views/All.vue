@@ -2,8 +2,9 @@
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useQuestionStore } from '@/store'
+import AI from '@/components/AI.vue'
 import Question from '@/components/Question.vue'
+import { useQuestionStore } from '@/store'
 
 const props = defineProps<{
   index?: string
@@ -61,6 +62,9 @@ function swipe(direction: string) {
         mode="view"
         :question="question"
         :answer="question?.answer"
+      />
+      <AI
+        :question="question"
       />
     </div>
     <v-banner

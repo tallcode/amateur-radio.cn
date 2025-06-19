@@ -1,0 +1,10 @@
+**正确选项解释**:
+QRQ 是Q简语中表示“要我加快发送速度吗”的标准缩写，意为“Shall I send faster?”，符合业余无线电通信规范。
+
+**错误选项解释**:
+- 选项B: QSQ 不是标准的Q简语或用于其他含义（如“Shall I send a series of dots?”），与此语境无关。
+- 选项C: QRS 表示“要我减慢发送速度吗”，意为“Shall I send slower?”，与加快速度相反。
+- 选项D: QRT 表示“要我停止发送吗”，意为“Shall I stop sending?”，不涉及速度调整。
+
+**关键字**:
+加快发送速度

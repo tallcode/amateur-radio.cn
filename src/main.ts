@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
-import App from './App.vue'
 import { registerPlugins } from '@/plugins'
+import App from './App.vue'
+import './index.less'
 
 const app = createApp(App)
 
