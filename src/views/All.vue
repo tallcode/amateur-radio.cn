@@ -43,20 +43,18 @@ function random() {
   router.push({ name: 'All', params: { index: newIndex } })
 }
 
-function swipe(direction: string) {
-  if (direction === 'right')
-    prev()
-  else if (direction === 'left')
-    next()
-  else if (direction === 'up')
-    random()
-}
+// function swipe(direction: string) {
+//   if (direction === 'right')
+//     prev()
+//   else if (direction === 'left')
+//     next()
+//   else if (direction === 'up')
+//     random()
+// }
 </script>
 
 <template>
-  <div
-    v-touch="{ left: () => swipe('left'), right: () => swipe('right'), up: () => swipe('up') }"
-  >
+  <div>
     <div class="mb-14">
       <Question
         mode="view"
@@ -64,6 +62,8 @@ function swipe(direction: string) {
         :answer="question?.answer"
       />
       <AI
+        v-if="question"
+        :key="question.id"
         :question="question"
       />
     </div>

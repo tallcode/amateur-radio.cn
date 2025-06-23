@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import renderMarkdown from '@/utils/md'
 
 const props = defineProps<{
-  question?: Question
+  question: Question
 }>()
 
 const explanationMap = ref<Record<string, string>>({})
 const explanation = computed(() => props.question?.id ? (explanationMap.value?.[props.question.id] ?? null) : null)
 
 async function fetchAIExplanation() {
-  if (!props.question || !props.question.id)
-    return
   try {
     const response = await fetch(`/src/assets/ai/${props.question.id}.txt`)
     if (response.ok) {
@@ -22,11 +20,36 @@ async function fetchAIExplanation() {
     console.error(error)
   }
 }
+
+const hasExplanation = ref(false)
+async function checkAIExplanation() {
+  try {
+    const response = await fetch(`/src/assets/ai/${props.question.id}.txt`, {
+      method: 'HEAD',
+    })
+    if (response.ok) {
+      hasExplanation.value = true
+    }
+  }
+  catch (error) {
+    console.error(error)
+  }
+}
+
+const show = ref(false)
+async function handleClick() {
+  await fetchAIExplanation()
+  show.value = true
+}
+
+onMounted(async () => {
+  await checkAIExplanation()
+})
 </script>
 
 <template>
-  <div v-if="question" class="pa-4">
-    <v-btn v-if="explanation === null" variant="tonal" color="warning" @click="fetchAIExplanation">
+  <div v-if="hasExplanation" class="pa-4">
+    <v-btn v-if="!show" variant="tonal" color="warning" @click="handleClick">
       查看AI解释
     </v-btn>
     <v-alert v-else :color="explanation ? 'success' : 'error'">
