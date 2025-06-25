@@ -1,0 +1,9 @@
+**正确选项解释**：
+RCVR是Receiver的缩写，RX是Receiver的常用简写，两者都表示接收机，符合'收信机'的含义。
+
+**错误选项解释**：
+- B: XCVR是Transceiver的缩写，表示收发信机（既能发送也能接收），不是单纯的接收机。
+- C: XMTR是Transmitter的缩写，表示发射机。
+- D: RMKS是Remarks的缩写，表示备注，与接收机无关。
+
+**关键字**：收信机

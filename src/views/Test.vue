@@ -106,12 +106,15 @@ async function handleAnswer(value: number) {
     const originIndex = currentExamQuestion.value.options[value]
     await bookmarkStore.record(currentExamQuestion.value.id, originIndex)
   }
+  else {
+    await bookmarkStore.correct(currentExamQuestion.value.id)
+  }
 }
 </script>
 
 <template>
   <div
-    v-touch="{ left: () => swipe('left'), right: () => swipe('right'), up: () => swipe('up') }"
+    v-touch="{ left: () => swipe('left'), right: () => swipe('right') }"
   >
     <v-banner
       v-if="finsihed"

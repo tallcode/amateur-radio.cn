@@ -43,7 +43,7 @@ export const useExaminationStore = defineStore('examination', () => {
     const examination = examinations.value.find(e => e.id === id)
     if (examination) {
       const question = examination.questions.find(question => question.id === questionId)
-      if (question) {
+      if (question && !question.answer) {
         question.answer = answer
         await database.update(examination)
       }

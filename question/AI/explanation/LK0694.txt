@@ -1,0 +1,9 @@
+**正确选项解释**：
+VXO是Variable Crystal Oscillator的缩写，意为可变石英振荡器，它是一种使用石英晶体提供稳定频率但允许微调频率的振荡器，常用于无线电设备中。
+
+**错误选项解释**：
+ - B: 可变频率振荡器通常指VFO（Variable Frequency Oscillator），不使用晶体，而是基于LC电路。
+ - C: 石英晶体元件仅指晶体本身（如石英谐振器），而非完整的振荡器电路。
+ - D: 压控振荡器是VCO（Voltage-Controlled Oscillator），频率由电压控制，与VXO的机械或电容调谐方式不同。
+
+**关键字**：VXO

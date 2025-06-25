@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import AI from '@/components/AI.vue'
 import Question from '@/components/Question.vue'
 import { useBookmarkStore, useQuestionStore } from '@/store'
 
@@ -123,6 +124,11 @@ async function clear() {
         :question="question"
         :answer="question?.answer"
         :wrong-answer="currentBookmark?.yourAnswer"
+      />
+      <AI
+        v-if="question"
+        :key="question.id"
+        :question="question"
       />
       <v-card variant="tonal" color="amber" class="ma-4">
         <template #text>
