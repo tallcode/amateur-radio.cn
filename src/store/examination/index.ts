@@ -67,10 +67,18 @@ export const useExaminationStore = defineStore('examination', () => {
     immediate: true,
   })
 
+  const clear = async () => {
+    examinations.value = []
+    await database.clear('a')
+    await database.clear('b')
+    await database.clear('c')
+  }
+
   return {
     examinations,
     create,
     answer,
     remove,
+    clear,
   }
 })

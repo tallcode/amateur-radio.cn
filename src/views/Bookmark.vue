@@ -49,15 +49,15 @@ function handleView(id?: string) {
 }
 
 function prev() {
-  const newIndex = index.value - 1
-  if (newIndex > 0)
-    handleView(bookmarks.value[newIndex - 1].id)
+  if (index.value > 1) {
+    handleView(bookmarks.value[index.value - 2].id)
+  }
 }
 
 function next() {
-  const newIndex = index.value + 1
-  if (newIndex <= bookmarks.value.length)
-    handleView(bookmarks.value[newIndex - 1].id)
+  if (index.value < bookmarks.value.length) {
+    handleView(bookmarks.value[index.value].id)
+  }
 }
 
 async function remove() {
@@ -117,8 +117,13 @@ async function clear() {
       </template>
     </v-banner>
   </div>
-  <div v-else>
-    <div class="mb-14">
+  <tempalte v-else>
+    <div
+      v-touch="{
+        left: () => next(),
+        right: () => prev(),
+      }" class="pb-14 h-100"
+    >
       <Question
         mode="review"
         :question="question"
@@ -168,5 +173,5 @@ async function clear() {
         </v-btn>
       </template>
     </v-banner>
-  </div>
+  </tempalte>
 </template>

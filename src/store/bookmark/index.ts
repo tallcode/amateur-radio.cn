@@ -49,11 +49,19 @@ export const useBookmarkStore = defineStore('bookmark', () => {
     immediate: true,
   })
 
+  const clearAll = async () => {
+    bookmarks.value = []
+    await database.clear('a')
+    await database.clear('b')
+    await database.clear('c')
+  }
+
   return {
     bookmarks,
     record,
     correct,
     remove,
     clear,
+    clearAll,
   }
 })
