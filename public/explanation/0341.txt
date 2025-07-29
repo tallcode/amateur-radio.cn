@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A中的“CU”（See You）、“CU AGN”（See You Again）、“GB”（Goodbye）都是业余无线电通信中常用的告别缩语。
+
+**错误选项解释**：
+- 选项B中的“GM”（Good Morning）、“GA”（Good Afternoon）、“GE”（Good Evening）、“GN”（Good Night）是问候语，不是告别用语。
+- 选项C中的“TU”（Thank You）、“TKS”（Thanks）、“TNX”（Thanks）、“MNI TKS”（Many Thanks）用于表示感谢，而非告别。
+- 选项D是英文完整表达，虽然意思正确，但在业余无线电通信中通常使用更简洁的缩语形式。

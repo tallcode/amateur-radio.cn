@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A使用了ITU语音字母表正确拼读呼号JA2IGY，即每个字母对应语音字母表中的单词，数字保持不变。
+
+**错误选项解释**：
+- 选项B包含多个多余的部分，如Three、Portable、Delta Lima Five Charlie Mike Papa，不符合呼号拼读规范。
+- 选项C中包含Kilo、Portable、Victor Echo Six，拼读方式错误，且与呼号内容不符。
+- 选项D仅包含部分字母，缺少完整拼读内容，且与呼号JA2IGY无关。

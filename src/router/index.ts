@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    name: 'Home',
     component: () => import('@/views/Home.vue'),
   },
   {
@@ -29,7 +30,7 @@ const routes = [
         component: () => import('@/views/History.vue'),
       },
       {
-        path: 'test/:id([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12})/:index(\\d+)?',
+        path: ':mode(test|history)/:id([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-4[a-fA-F0-9]{3}-[8|9|aA|bB][a-fA-F0-9]{3}-[a-fA-F0-9]{12})/:index(\\d+)?',
         name: 'Test',
         props: true,
         component: () => import('@/views/Test.vue'),

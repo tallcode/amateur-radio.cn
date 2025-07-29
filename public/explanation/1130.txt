@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A：LED是Light Emitting Diode的缩写，即发光二极管，是一种能够将电能转化为光能的半导体器件。
+
+**错误选项解释**：
+ - 选项B：液晶显示器的缩写是LCD（Liquid Crystal Display），不是LED。
+ - 选项C：阴极射线管的缩写是CRT（Cathode Ray Tube），用于传统显示器或示波器。
+ - 选项D：束射四极管是一种电子管，不属于LED的范畴。

@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A（VHF）是指甚高频（Very High Frequency），其频率范围为30 MHz至300 MHz，50 MHz-54 MHz属于该范围。
+
+**错误选项解释**：
+ - 选项B（HF）是指高频（High Frequency），频率范围为3 MHz至30 MHz，50 MHz-54 MHz不在该范围内。
+ - 选项C（SHF）是指超高频（Super High Frequency），频率范围为3 GHz至30 GHz，远高于题目中提供的频率。
+ - 选项D（UHF）是指特高频（Ultra High Frequency），频率范围为300 MHz至3 GHz，50 MHz-54 MHz不在该范围内。

@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A：ATT是英文“Attenuator”的缩写，意思是衰减器。在收信机中，ATT功能用于在接收强信号时接入衰减器，防止信号过大导致前级电路过载或失真，是接收机的一部分。
+
+**错误选项解释**：
+ - 选项B：自动天线调谐（通常称为ATU或Antenna Tuning Unit）是天线调谐器的功能，不属于ATT。
+ - 选项C：发信自动电平控制通常是ALC（Automatic Level Control）功能，用于控制发射射频电平。
+ - 选项D：自动音量控制一般指AVC（Automatic Volume Control），作用于音频输入端，也不属于ATT。

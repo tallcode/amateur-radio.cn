@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+import { xor } from 'lodash-es'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -17,10 +18,10 @@ const list = computed(() => {
       createdAt: dayjs(item.createdAt).format('YYYY-MM-DD HH:mm:ss'),
       status: [
         item.questions.filter(
-          question => question.answer === question.options.indexOf(0),
+          question => xor(question.S, question.T).length === 0,
         ).length,
         item.questions.filter(
-          question => question.answer !== undefined && question.answer !== question.options.indexOf(0),
+          question => question.S.length > 0 && xor(question.S, question.T).length > 0,
         ).length,
         item.questions.length,
       ],
@@ -52,7 +53,7 @@ async function remove(id: string) {
       <tr
         v-for="item in list"
         :key="item.id"
-        @click="() => router.push({ name: 'Test', params: { id: item.id, index: 1 } })"
+        @click="() => router.push({ name: 'Test', params: { id: item.id, index: 1, mode: 'history' } })"
       >
         <td>{{ item.createdAt }}</td>
         <td>{{ item.status.join('/') }}</td>

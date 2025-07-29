@@ -3,8 +3,9 @@ interface Examination {
   category: string
   createdAt: number
   questions: {
-    id: string
-    options: number[]
-    answer?: number
+    I: string
+    O: number[]
+    T: number[]
+    S: number[]
   }[]
 }

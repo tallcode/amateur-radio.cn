@@ -1,0 +1,7 @@
+**正确选项解释**：
+- 选项A（CTSSS）：CTSSS（Continuous Tone-Coded Squelch System）是一种亚音静噪技术，通过在发射信号中加入一个低频音频信号（通常在67Hz到250.3Hz之间），接收机可以根据该信号来控制静噪的开启与关闭。
+- 选项B（DCS）：DCS（Digital-Coded Squelch）是一种数字亚音静噪技术，它使用一串特定的数字编码低频信号附加在语音信号中，用于选通接收机的静噪，与CTSSS类似但采用数字编码方式。
+
+**错误选项解释**：
+- 选项C（DTMF）：DTMF（Dual-Tone Multi-Frequency）是双音多频信号，用于电话拨号和远程控制，不用于静噪选通。
+- 选项D（SQL）：SQL（Squelch）是接收机的静噪控制功能，用于抑制无信号时的噪声输出，但它本身不是一种附加在发射信号上的选通信号技术。

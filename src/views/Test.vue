@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { xor } from 'lodash-es'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -8,10 +9,11 @@ import { useBookmarkStore, useExaminationStore, useQuestionStore } from '@/store
 const props = defineProps<{
   id: string
   index: string
+  mode: 'test' | 'history'
 }>()
 
 const questionStore = useQuestionStore()
-const { category, questions } = storeToRefs(questionStore)
+const { category, full } = storeToRefs(questionStore)
 const examinationStore = useExaminationStore()
 const { examinations } = storeToRefs(examinationStore)
 const bookmarkStore = useBookmarkStore()
@@ -27,13 +29,13 @@ const examQuestions = computed(() => {
 })
 
 const finsihed = computed(() => {
-  return examQuestions.value.length && examQuestions.value.every(item => item.answer !== undefined)
+  return examQuestions.value.length && examQuestions.value.every(item => item.S.length > 0)
 })
 
 const status = computed(() => {
   return [
     examQuestions.value.filter(
-      question => question.answer === question.options.indexOf(0),
+      question => xor(question.S, question.T).length === 0,
     ).length,
     examQuestions.value.length,
   ]
@@ -44,48 +46,69 @@ const currentExamQuestion = computed(() => {
 })
 
 const question = computed(() => {
-  if (questions.value.length) {
-    const q = questions.value.find(item => item.id === currentExamQuestion.value?.id)
+  if (full.value.length) {
+    const q = full.value.find(item => item.I === currentExamQuestion.value?.I)
     if (q) {
-      const { options, answer, ...rest } = q
+      const { O, T, ...rest } = q
       return {
         ...rest,
-        options: currentExamQuestion.value?.options.map(id => options[id]),
-        answer: currentExamQuestion.value?.options.findIndex(id => id === answer),
+        T: currentExamQuestion.value?.T || [],
+        O: currentExamQuestion.value?.O.map(id => O[id]),
       } as Question
     }
-    else { return undefined }
+    else {
+      return undefined
+    }
   }
-  else { return undefined }
+  else {
+    return undefined
+  }
 })
 
 const answer = computed({
   get() {
-    return currentExamQuestion.value?.answer
+    return currentExamQuestion.value?.S || []
   },
   async set(value) {
-    if (Number.isSafeInteger(value) && question.value)
-      await examinationStore.answer(props.id, question.value?.id, value!)
+    if (question.value) {
+      await examinationStore.answer(props.id, question.value?.I, Array.isArray(value) ? value : [])
+    }
   },
 })
 
+const disableNext = computed(() => {
+  if (index.value === examQuestions.value.length) {
+    return true
+  }
+  if (props.mode === 'history') {
+    return false
+  }
+  else {
+    return !(Array.isArray(answer.value) && answer.value.length)
+  }
+})
+
 function next() {
-  const newIndex = index.value + 1
-  if (newIndex <= questions.value.length)
-    router.push({ name: 'Test', params: { category: category.value, id: props.id, index: newIndex } })
+  if (disableNext.value) {
+    return
+  }
+  const isCorrect = currentExamQuestion.value?.S && xor(currentExamQuestion.value?.S, currentExamQuestion.value?.T).length === 0
+  if (isCorrect) {
+    bookmarkStore.correct(currentExamQuestion.value.I)
+  }
+  else {
+    bookmarkStore.record(currentExamQuestion.value.I, currentExamQuestion.value.S.map(a => currentExamQuestion.value.O[a]))
+  }
+
+  if (index.value < full.value.length) {
+    router.push({ name: 'Test', params: { mode: props.mode, category: category.value, id: props.id, index: index.value + 1 } })
+  }
 }
 
 function prev() {
-  const newIndex = index.value - 1
-  if (newIndex > 0)
-    router.push({ name: 'Test', params: { category: category.value, id: props.id, index: newIndex } })
-}
-
-function swipe(direction: string) {
-  if (direction === 'left' && answer.value !== undefined)
-    next()
-  else if (direction === 'right')
-    prev()
+  if (index.value > 1) {
+    router.push({ name: 'Test', params: { mode: props.mode, category: category.value, id: props.id, index: index.value - 1 } })
+  }
 }
 
 async function handleNewTest() {
@@ -93,78 +116,69 @@ async function handleNewTest() {
   router.push({
     name: 'Test',
     params: {
+      mode: 'test',
       category: category.value,
       id,
       index: 1,
     },
   })
 }
-
-async function handleAnswer(value: number) {
-  answer.value = value
-  if (question.value?.answer !== value) {
-    const originIndex = currentExamQuestion.value.options[value]
-    await bookmarkStore.record(currentExamQuestion.value.id, originIndex)
-  }
-  else {
-    await bookmarkStore.correct(currentExamQuestion.value.id)
-  }
-}
 </script>
 
 <template>
-  <div
-    v-touch="{ left: () => swipe('left'), right: () => swipe('right') }"
+  <v-banner
+    v-if="finsihed"
+    :sticky="true"
+    lines="one"
+    bg-color="teal-lighten-3"
   >
-    <v-banner
-      v-if="finsihed"
-      :sticky="true"
-      lines="one"
-      bg-color="teal-lighten-3"
-    >
-      <template #text>
-        {{ `全部完成! (${status.join('/')})` }}
-      </template>
+    <template #text>
+      {{ `全部完成! (${status.join('/')})` }}
+    </template>
 
-      <template #actions>
-        <v-btn color="primary" @click="router.push({ name: 'History' })">
-          查看历史
-        </v-btn>
-        <v-btn color="primary" @click="handleNewTest">
-          开始新测试
-        </v-btn>
-      </template>
-    </v-banner>
-    <div class="mb-14">
-      <Question
-        :question="question"
-        mode="test"
-        :answer="answer"
-        @select="handleAnswer"
-      />
-    </div>
-    <v-banner
-      position="fixed"
-      lines="one"
-      color="primary"
-      bg-color="white"
-      :style="{ bottom: '55px', borderTopWidth: '1px' }"
-    >
-      <template #text>
-        {{ `${index}/${examQuestions.length}` }}
-      </template>
-
-      <template #actions>
-        <v-btn :disabled="index === 1" @click="prev">
-          上一题
-        </v-btn>
-        <v-btn
-          :disabled="answer === undefined || index === examQuestions.length"
-          @click="next"
-        >
-          下一题
-        </v-btn>
-      </template>
-    </v-banner>
+    <template #actions>
+      <v-btn color="primary" @click="router.push({ name: 'History' })">
+        查看历史
+      </v-btn>
+      <v-btn color="primary" @click="handleNewTest">
+        开始新测试
+      </v-btn>
+    </template>
+  </v-banner>
+  <div
+    v-touch="{
+      left: () => next(),
+      right: () => prev(),
+    }"
+    class="h-100 pb-14"
+  >
+    <Question
+      v-model:selected="answer"
+      :question="question"
+      :mode="mode"
+    />
   </div>
+  <v-banner
+    position="fixed"
+    lines="one"
+    color="primary"
+    bg-color="white"
+    :style="{ bottom: '55px', borderTopWidth: '1px' }"
+  >
+    <template #text>
+      {{ `${index}/${examQuestions.length}` }}
+    </template>
+
+    <template #actions>
+      <v-btn :disabled="index === 1" @click="prev">
+        上一题
+      </v-btn>
+      <v-btn
+        :disabled="disableNext"
+        @click="next"
+      >
+        下一题
+      </v-btn>
+    </template>
+  </v-banner>
 </template>

@@ -14,7 +14,7 @@ const props = defineProps<{
 const bookmarkStore = useBookmarkStore()
 const { bookmarks } = storeToRefs(bookmarkStore)
 const questionStore = useQuestionStore()
-const { questions } = storeToRefs(questionStore)
+const { full } = storeToRefs(questionStore)
 const router = useRouter()
 
 const list = computed(() => {
@@ -24,7 +24,7 @@ const list = computed(() => {
       category: item.category,
       time: dayjs(item.time).format('YYYY-MM-DD HH:mm:ss'),
       questionId: item.questionId,
-      yourAnswer: item.yourAnswer,
+      S: item.S,
     }
   })
 })
@@ -38,8 +38,8 @@ const currentBookmark = computed(() => {
 })
 
 const question = computed(() => {
-  if (questions.value.length && currentBookmark.value)
-    return questions.value.find(item => item.id === currentBookmark.value?.questionId)
+  if (full.value.length && currentBookmark.value)
+    return full.value.find(item => item.I === currentBookmark.value?.questionId)
   else
     return undefined
 })
@@ -97,7 +97,7 @@ async function clear() {
         >
           <td>{{ item.time }}</td>
           <td>{{ item.questionId }}</td>
-          <td>{{ String.fromCharCode(65 + item.yourAnswer) }}</td>
+          <td>{{ item.S.map(a => String.fromCharCode(65 + a)).join(',') }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -122,12 +122,11 @@ async function clear() {
       <Question
         mode="review"
         :question="question"
-        :answer="question?.answer"
-        :wrong-answer="currentBookmark?.yourAnswer"
+        :answer="question?.T"
+        :selected="currentBookmark?.S"
       />
       <AI
         v-if="question"
-        :key="question.id"
         :question="question"
       />
       <v-card variant="tonal" color="amber" class="ma-4">

@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A使用了ITU语音字母表中规定的拼读方式，且字母与呼号VR2ZQW一一对应：V=Victor，R=Romeo，2=Two，Z=Zulu，Q=Quebec，W=Whiskey。
+
+**错误选项解释**：
+- 选项B的拼读内容与VR2ZQW不符，且包含未在呼号中出现的字母如Bravo、Hotel、Xray、Yankee、Zulu多余。
+- 选项C中的字母拼读与呼号VR2ZQW不匹配，且包含未在呼号中出现的字母如Bravo、Seven、Charlie、Alfa多余。
+- 选项D中的数字和字母与呼号VR2ZQW完全不一致，如Four、Uniform、November等均未出现在呼号中。

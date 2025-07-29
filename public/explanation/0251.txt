@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A使用了ITU语音字母表中规定的标准发音，正确拼读为：Bravo（B）、Sierra（S）、Seven（7）、Hotel（H），符合业余无线电通信中的规范。
+
+**错误选项解释**：
+- 选项B包含多余内容（如Portable）和不相关词汇（如Delta、Zero、Foxtrot、Zulu等），不符合BS7H的拼读要求。
+- 选项C包含不相关词汇（如Kilo、Tango、Romeo等），且与BS7H无关。
+- 选项D拼读内容与BS7H不匹配，使用了Juliett、Alfa、Two、India等错误字母。

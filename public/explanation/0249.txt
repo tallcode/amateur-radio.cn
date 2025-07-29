@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A：Four Uniform One Uniform November，符合ITU语音字母表对呼号4U1UN的规范拼读方式。
+
+**错误选项解释**：
+ - 选项B：Bravo Hotel One Xray Yankee Zulu，拼读内容与呼号4U1UN无关。
+ - 选项C：Bravo Seven Charlie Romeo Alfa，拼读内容不符合ITU语音字母表的规范。
+ - 选项D：Victor Romeo Two Zulu Quebec Whiskey，拼读内容与呼号无关且不符合规范。

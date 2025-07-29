@@ -1,8 +1,9 @@
 interface Question {
-  id: string
-  category: string[]
-  question: string
-  picture: string
-  options: string[]
-  answer: number
+  I: string
+  Q: string
+  F: string
+  O: string[]
+  T: number[]
+  J: string
+  P: string[]
 }

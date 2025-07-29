@@ -6,7 +6,12 @@ export const useExplanationStore = defineStore('explanation', () => {
     return database.get(questionId)
   }
 
+  async function clear() {
+    return database.clear()
+  }
+
   return {
     get,
+    clear,
   }
 })

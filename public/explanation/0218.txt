@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A（MF）代表中频（Medium Frequency），其频率范围为300 kHz - 3 MHz，1,800 kHz - 2,000 kHz 属于该范围，因此属于MF频段。
+
+**错误选项解释**：
+- 选项B（HF）代表高频（High Frequency），频率范围为3 MHz - 30 MHz，不包括此频段。
+- 选项C（VHF）代表甚高频（Very High Frequency），频率范围为30 MHz - 300 MHz，与此无关。
+- 选项D（LF）代表低频（Low Frequency），频率范围为30 kHz - 300 kHz，也不包括此频段。

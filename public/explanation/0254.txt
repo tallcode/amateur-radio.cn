@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A正确使用了ITU语音字母表来拼读呼号3DA0FZ/DL5CMP，其中每个字母都对应语音字母表中的标准发音词，且“Portable”用于表示斜杠（/）。
+
+**错误选项解释**：
+- 选项B中使用了Kilo等词汇，与该呼号无关。
+- 选项C拼读的是Juliett Alfa Two India Golf Yankee，与呼号3DA0FZ/DL5CMP不匹配。
+- 选项D的Bravo Sierra Seven Hotel无法表示题干中的完整呼号。

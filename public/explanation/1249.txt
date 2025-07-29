@@ -1,0 +1,7 @@
+**正确选项解释**：
+- 选项A：XTAL 是英文 "Crystal"（晶体）的缩写，通常用来表示石英晶体谐振器，这是一种利用石英晶体的压电效应来稳定频率的电子元件。
+
+**错误选项解释**：
+- 选项B：可变频率振荡器一般缩写为 VFO（Variable Frequency Oscillator），不是 XTAL。
+- 选项C：虽然石英晶体振荡器中也使用了 XTAL，但 XTAL 本身仅指晶体谐振器部分，而不是整个振荡器电路。
+- 选项D：压控振荡器通常缩写为 VCO（Voltage-Controlled Oscillator），与 XTAL 无关。

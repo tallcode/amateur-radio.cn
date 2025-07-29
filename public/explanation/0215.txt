@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A：135.7-137.8kHz 属于低频段（LF，Low Frequency），也称为长波频段，频率范围为30 kHz至300 kHz。
+
+**错误选项解释**：
+ - 选项B：甚低频（VLF，Very Low Frequency）频率范围为3 kHz至30 kHz，频率更低，不属于该频段。
+ - 选项C：特低频（ULF，Ultra Low Frequency）频率范围通常为300 Hz至3 kHz，频率远低于题目所给范围。
+ - 选项D：超低频（SLF，Super Low Frequency）频率范围约为30 Hz至300 Hz，频率更低，不符合题目频段。

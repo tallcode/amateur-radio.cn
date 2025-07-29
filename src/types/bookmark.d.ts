@@ -3,5 +3,5 @@ interface Bookmark {
   time: number
   category: string
   questionId: string
-  yourAnswer: number
+  S: number[]
 }

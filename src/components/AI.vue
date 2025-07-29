@@ -17,7 +17,7 @@ async function handleClick() {
 }
 
 onMounted(async () => {
-  explanation.value = await get(props.question.id)
+  explanation.value = await get(props.question.I)
 })
 </script>
 

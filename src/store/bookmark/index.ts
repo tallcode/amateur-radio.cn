@@ -19,7 +19,7 @@ export const useBookmarkStore = defineStore('bookmark', () => {
     await database.clear(category.value)
   }
 
-  const record = async function (questionId: string, yourAnswer: number) {
+  const record = async function (questionId: string, S: number[]) {
     const bookmark = bookmarks.value.find(b => b.questionId === questionId && b.category === category.value)
     if (bookmark)
       await remove(bookmark.id)
@@ -28,7 +28,7 @@ export const useBookmarkStore = defineStore('bookmark', () => {
       time: Date.now(),
       category: category.value,
       questionId,
-      yourAnswer,
+      S,
     }
     bookmarks.value = [newBookmark, ...bookmarks.value]
     await database.create(category.value, newBookmark)

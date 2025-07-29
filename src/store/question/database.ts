@@ -1,5 +1,13 @@
 import localforage from 'localforage'
-import LoadQuestionAPI from '@/assets/full.json?url'
+import QuestionA from '@/assets/A.json?url'
+import QuestionB from '@/assets/B.json?url'
+import QuestionC from '@/assets/C.json?url'
+
+const question = {
+  a: QuestionA,
+  b: QuestionB,
+  c: QuestionC,
+}
 
 const store = localforage.createInstance({
   name: 'question',
@@ -12,26 +20,34 @@ const cache = {
   c: undefined,
 } as Record<string, Question[] | undefined>
 
-export async function read() {
-  const cache = await store.getItem('all') as Question[]
+export async function read(category: 'a' | 'b' | 'c') {
+  const cache = await store.getItem(category) as Question[]
   if (Array.isArray(cache) && cache.length) {
     return cache
   }
   else {
-    const data = await fetch(LoadQuestionAPI).then(res => res.json()) as Question[]
+    const data = await fetch(question[category]).then(res => res.json()) as Question[]
     if (Array.isArray(data) && data.length)
-      await store.setItem('all', data)
+      await store.setItem(category, data)
     return data
   }
 }
 
-export async function get(category: string) {
+export async function get(category: 'a' | 'b' | 'c') {
   if (cache[category]) {
     return cache[category]!
   }
   else {
-    const data = await read()
-    cache[category] = data.filter(question => question.category.includes(category.toUpperCase()))
+    const data = await read(category)
+    cache[category] = data
     return cache[category]!
   }
+}
+
+export async function clear() {
+  await store.clear()
+  Object.keys(cache).forEach((key) => {
+    cache[key as 'a' | 'b' | 'c'] = undefined
+  })
+  return true
 }

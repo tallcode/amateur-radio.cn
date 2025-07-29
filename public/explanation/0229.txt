@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A（SHF）代表超高频（Super High Frequency），其频率范围为3 GHz至30 GHz。10-10.5 GHz位于这一范围内，因此属于SHF波段。
+
+**错误选项解释**：
+- 选项B（UHF）代表特高频（Ultra High Frequency），其频率范围为0.3 GHz至3 GHz，10-10.5 GHz超出了该范围。
+- 选项C（EHF）代表极高频（Extremely High Frequency），其频率范围为30 GHz至300 GHz，10-10.5 GHz未达到该范围。
+- 选项D（VHF）代表甚高频（Very High Frequency），其频率范围为30 MHz至300 MHz，10-10.5 GHz远高于该范围。

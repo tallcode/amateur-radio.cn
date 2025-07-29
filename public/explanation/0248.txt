@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A中“Bravo Seven Charlie Romeo Alfa”是ITU语音字母表中对呼号B7CRA的正确拼读方式，字母与数字对应准确，符合业余无线电通信规范。
+
+**错误选项解释**：
+ - 选项B中“Hotel One Xray Yankee Zulu”拼读不符合B7CRA的字符，且包含无关字符。
+ - 选项C中“Four Uniform One Uniform November”完全不符合B7CRA的字符拼读规则。
+ - 选项D中“Victor Romeo Two Zulu Quebec Whiskey”也与B7CRA无关，属于错误拼读。

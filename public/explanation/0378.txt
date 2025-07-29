@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A（ARDF）是“ Amateur Radio Direction Finding ”的缩写，中文意思是“业余无线电测向”，这是国际上通用的术语缩写。
+
+**错误选项解释**：
+ - 选项B（ATU）通常代表“Antenna Tuning Unit”，即天线调谐单元，与测向无关。
+ - 选项C（ADDR）是“Address”的缩写，常用于计算机或通信协议中，不适用于业余无线电测向。
+ - 选项D（ANT）是“Antenna”的缩写，意为天线，也与测向的术语无关。

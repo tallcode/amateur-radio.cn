@@ -7,30 +7,33 @@ import * as database from './database'
 
 export const useExaminationStore = defineStore('examination', () => {
   const questionStore = useQuestionStore()
-  const { category, questions } = storeToRefs(questionStore)
+  const { category, full } = storeToRefs(questionStore)
   const examinations = ref<Examination[]>([])
 
   const num = (category: string) => {
     switch (category) {
       case 'b':
-        return 50
+        return 60
       case 'c':
-        return 80
+        return 90
       default:
-        return 30
+        return 40
     }
   }
 
   const create = async () => {
-    const examQuestions = sortBy(sampleSize(questions.value, num(category.value)), 'id')
+    const examQuestions = sortBy(sampleSize(full.value, num(category.value)), 'I')
     const newExamination: Examination = {
       id: uuidv4(),
       createdAt: Date.now(),
       category: category.value,
       questions: examQuestions.map((q) => {
+        const O = shuffle([0, 1, 2, 3])
         return {
-          id: q.id,
-          options: shuffle([0, 1, 2, 3]),
+          I: q.I,
+          O,
+          T: q.T.map(id => O.indexOf(id)),
+          S: [],
         }
       }),
     }
@@ -39,12 +42,12 @@ export const useExaminationStore = defineStore('examination', () => {
     return newExamination.id
   }
 
-  const answer = async (id: string, questionId: string, answer: number) => {
+  const answer = async (id: string, questionId: string, answer: number[]) => {
     const examination = examinations.value.find(e => e.id === id)
     if (examination) {
-      const question = examination.questions.find(question => question.id === questionId)
-      if (question && !question.answer) {
-        question.answer = answer
+      const question = examination.questions.find(question => question.I === questionId)
+      if (question) {
+        question.S = answer || []
         await database.update(examination)
       }
     }

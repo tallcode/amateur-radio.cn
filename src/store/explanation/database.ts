@@ -30,3 +30,8 @@ export async function get(questionId: string) {
     return data
   }
 }
+
+export async function clear() {
+  await store.clear()
+  return true
+}

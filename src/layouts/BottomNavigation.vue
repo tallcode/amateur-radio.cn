@@ -13,7 +13,17 @@ const route = useRoute()
 
 const selected = computed({
   get() {
-    return route.name
+    if (route.name === 'Test') {
+      if (route.params.mode === 'history') {
+        return 'History'
+      }
+      else {
+        return 'Test'
+      }
+    }
+    else {
+      return route.name
+    }
   },
   async set(value) {
     switch (value) {
@@ -37,12 +47,13 @@ async function handleTest() {
   if (selected.value === 'Test')
     return
   const last = examinations.value[0]
-  const finsihed = last ? last?.questions.every(item => item.answer !== undefined) : true
+  const finsihed = last ? last?.questions.every(item => item.S.length) : true
   const id = finsihed ? await create() : last?.id
-  const index = finsihed ? 1 : last?.questions.findIndex(item => item.answer === undefined) + 1
+  const index = finsihed ? 1 : last?.questions.findIndex(item => item.S.length === 0) + 1
   router.push({
     name: 'Test',
     params: {
+      mode: 'test',
       category: category.value,
       id,
       index,
@@ -70,7 +81,7 @@ async function handleTest() {
 
     <v-btn value="Test">
       <v-icon>mdi-note-edit</v-icon>
-      <span>测试</span>
+      <span>模拟考</span>
     </v-btn>
   </v-bottom-navigation>
 </template>

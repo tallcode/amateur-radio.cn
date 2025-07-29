@@ -1,0 +1,7 @@
+**正确选项解释**：
+选项A正确，因为根据国际电信联盟(ITU)分配的业余无线电呼号前缀标准：3V代表突尼斯(Tunisia)，4X代表以色列(Israel)，5A代表利比亚(Libya)，6Y代表牙买加(Jamaica)，与选项内容完全匹配。中国作为ITU成员，遵守这些国际标准。
+
+**错误选项解释**：
+- 选项B错误：3V不是几内亚(Guinea)，6Y不是斐济(Fiji Islands)或塞内加尔(Senegal)。
+- 选项C错误：3V不是利比亚(Libya)，5A不是牙买加(Jamaica)。
+- 选项D错误：3V不是牙买加(Jamaica)，6Y不是塞内加尔(Senegal)。
