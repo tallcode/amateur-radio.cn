@@ -1,12 +1,9 @@
 import localforage from 'localforage'
-import QuestionA from '@/assets/A.json?url'
-import QuestionB from '@/assets/B.json?url'
-import QuestionC from '@/assets/C.json?url'
 
 const question = {
-  a: QuestionA,
-  b: QuestionB,
-  c: QuestionC,
+  a: '/question/A.json',
+  b: '/question/B.json',
+  c: '/question/C.json',
 }
 
 const store = localforage.createInstance({

@@ -94,7 +94,6 @@ watch(_question, () => {
     v-touch="{
       left: () => next(),
       right: () => prev(),
-      up: () => random(),
     }" class="pb-14 h-100"
   >
     <Question

@@ -1,13 +1,30 @@
-import katexEngine from 'katex'
-import markdownit from 'markdown-it'
-import Texmath from 'markdown-it-texmath'
+let mdInstance: any = null
 
-const md = markdownit()
-md.use(Texmath, {
-  engine: katexEngine,
-  delimiters: ['brackets', 'dollars'],
-})
+async function initMarkdown() {
+  if (mdInstance) {
+    return mdInstance
+  }
 
-export default function renderMarkdown(markdown: string): string {
+  const [
+    { default: katexEngine },
+    { default: markdownit },
+    { default: Texmath },
+  ] = await Promise.all([
+    import('katex'),
+    import('markdown-it'),
+    import('markdown-it-texmath'),
+  ])
+
+  mdInstance = markdownit()
+  mdInstance.use(Texmath, {
+    engine: katexEngine,
+    delimiters: ['brackets', 'dollars'],
+  })
+
+  return mdInstance
+}
+
+export default async function renderMarkdown(markdown: string): Promise<string> {
+  const md = await initMarkdown()
   return md.render(markdown)
 }

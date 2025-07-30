@@ -14,7 +14,7 @@ const selected = defineModel<number[]>('selected', {
 
 const picUrl = computed(() => {
   if (props.question && props.question.F)
-    return (new URL(`/src/assets/picture/${props.question.F}`, import.meta.url)).href
+    return `/question/picture/${props.question.F}`
   else
     return undefined
 })

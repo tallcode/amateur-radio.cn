@@ -10,6 +10,7 @@ const props = defineProps<{
 const { get } = useExplanationStore()
 
 const explanation = ref<string>()
+const html = ref<string>()
 
 const show = ref(false)
 async function handleClick() {
@@ -18,6 +19,7 @@ async function handleClick() {
 
 onMounted(async () => {
   explanation.value = await get(props.question.I)
+  html.value = await renderMarkdown(explanation.value)
 })
 </script>
 
@@ -27,7 +29,7 @@ onMounted(async () => {
       查看AI解释
     </v-btn>
     <v-alert v-else :color="explanation ? 'success' : 'error'">
-      <div v-if="explanation" class="markdown" v-html="renderMarkdown(explanation)" />
+      <div v-if="explanation" class="markdown" v-html="html" />
       <div v-else>
         暂无AI解释
       </div>
